@@ -1,0 +1,5 @@
+streamlit
+openai
+pydantic
+fastapi    # Only required for backend API deployment
+uvicorn    # Only required to run the FastAPI server locally

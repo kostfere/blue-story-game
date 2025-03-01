@@ -1,0 +1,28 @@
+# 🔹 Ignore Python Virtual Environment
+venv/
+.env
+
+# 🔹 Ignore Compiled Python Files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 🔹 Ignore Logs and Temporary Files
+logs/
+*.log
+*.out
+*.tmp
+
+# 🔹 Ignore IDE / Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 🔹 Ignore Python Dependencies (If using a virtual environment)
+*.egg-info/
+*.pytest_cache/
+
+# 🔹 Ignore Streamlit Cache (Optional)
+.streamlit/

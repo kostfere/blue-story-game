@@ -102,7 +102,7 @@ def main():
         with st.expander("🕵️‍♂️ Reveal the Hidden Fact"):
             if st.session_state.mystery:
                 st.subheader("🔎 Hidden Fact:")
-                st.write(st.session_state.mystery.hidden_fact)
+                st.write(st.session_state.mystery.answer)
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,4 @@
-.PHONY: run-api run-streamlit
+.PHONY: run-api run-streamlit install activate run-backend format lint lint-format bump-patch bump-minor bump-major
 
 # Automatically set PYTHONPATH to the project root
 export PYTHONPATH := $(shell pwd)
@@ -22,7 +22,18 @@ run-streamlit:
 run-backend:
 	@export PYTHONPATH=$(PYTHONPATH) && source $(VENV) && uvicorn backend.main:app --reload
 
+# Format code using Ruff (similar to Black)
+format:
+	@source $(VENV) && ruff format .
 
+# Lint code and automatically fix issues
+lint:
+	@source $(VENV) && ruff check . --fix
+
+# Run both formatting and linting
+lint-format: format lint
+
+# Version bumping
 bump-patch:
 	bumpversion patch
 

@@ -1,7 +1,8 @@
-import os
-from core.schemas import Mystery
-from core.generate.generate_story_prompt import GENERATE_STORY_PROMPT
 from openai import OpenAI
+
+from core.generate.generate_story_prompt import GENERATE_STORY_PROMPT
+from core.schemas import Mystery
+
 
 def generate_mystery(client: OpenAI) -> Mystery:
     prompt = GENERATE_STORY_PROMPT

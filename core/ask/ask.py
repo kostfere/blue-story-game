@@ -1,10 +1,12 @@
-import os
-from core.schemas import YesNoResponse
 from openai import OpenAI
+
 from core.ask.answer_question_prompt import ANSWER_QUESTION_PROMPT_TEMPLATE
+from core.schemas import YesNoResponse
+
 
 def load_prompt(backstory: str, answer: str) -> str:
     return ANSWER_QUESTION_PROMPT_TEMPLATE.format(backstory=backstory, answer=answer)
+
 
 def ask_question(client: OpenAI, user_question: str, backstory: str, answer: str) -> str:
     prompt = load_prompt(backstory, answer)

@@ -1,14 +1,16 @@
-from fastapi import FastAPI, HTTPException
-from core.game import generate_mystery, ask_question, check_fact
-from core.schemas import Mystery, YesNoResponse, FactValidation
 import logging
+
+from fastapi import FastAPI, HTTPException
+
+from core.game import ask_question, check_fact, generate_mystery
+from core.schemas import FactValidation, Mystery, YesNoResponse
 
 app = FastAPI()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-# Global storage for the current mystery (for demonstration purposes)
 current_mystery: Mystery = None
+
 
 @app.post("/generate_mystery/", response_model=Mystery)
 async def generate():
@@ -18,7 +20,8 @@ async def generate():
         return current_mystery
     except Exception as e:
         logger.error("Error generating mystery: %s", e)
-        raise HTTPException(status_code=500, detail="Error generating mystery")
+        raise HTTPException(status_code=500, detail="Error generating mystery") from e
+
 
 @app.post("/ask_question/", response_model=YesNoResponse)
 async def ask(user_question: str):
@@ -29,7 +32,8 @@ async def ask(user_question: str):
         return {"answer": answer}
     except Exception as e:
         logger.error("Error answering question: %s", e)
-        raise HTTPException(status_code=500, detail="Error processing question")
+        raise HTTPException(status_code=500, detail="Error processing question") from e
+
 
 @app.post("/check_fact/", response_model=FactValidation)
 async def check(user_fact: str):
@@ -40,4 +44,4 @@ async def check(user_fact: str):
         return {"is_correct": is_correct}
     except Exception as e:
         logger.error("Error checking fact: %s", e)
-        raise HTTPException(status_code=500, detail="Error checking fact")
+        raise HTTPException(status_code=500, detail="Error checking fact") from e

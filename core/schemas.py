@@ -12,6 +12,4 @@ class YesNoResponse(BaseModel):
 
 
 class FactValidation(BaseModel):
-    is_correct: bool = Field(
-        ..., description="True if the user's guess matches the hidden fact, False otherwise."
-    )
+    result: str = Field(..., description="One of 'Yes', 'No', or 'Yes but incomplete'.")

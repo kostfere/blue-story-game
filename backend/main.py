@@ -48,8 +48,8 @@ async def check(user_fact: str, client: OpenAI = openai_client_dependency):
     if current_mystery is None:
         raise HTTPException(status_code=400, detail="No mystery has been generated yet.")
     try:
-        is_correct = check_fact(client, user_fact, current_mystery)
-        return {"is_correct": is_correct}
+        answer = check_fact(client, user_fact, current_mystery)
+        return {"answer": answer}
     except Exception as e:
         logger.error("Error checking fact: %s", e)
         raise HTTPException(status_code=500, detail="Error checking fact") from e

@@ -2,8 +2,8 @@ from openai import OpenAI
 
 from core.check.check_answer_prompt import (
     CHECK_ANSWER_PROMPT_TEMPLATE,
-)  # Import the prompt template from prompt.py
-from core.schemas import FactValidation
+)
+from core.schemas import FactValidation, Mystery
 
 
 def load_prompt(backstory: str, answer: str, user_fact: str) -> str:
@@ -12,8 +12,8 @@ def load_prompt(backstory: str, answer: str, user_fact: str) -> str:
     )
 
 
-def check_fact(client: OpenAI, user_fact: str, backstory: str, answer: str) -> bool:
-    prompt = load_prompt(backstory, answer, user_fact)
+def check_fact(client: OpenAI, user_fact: str, mystery: Mystery) -> bool:
+    prompt = load_prompt(mystery.backstory, mystery.answer, user_fact)
     response = client.beta.chat.completions.parse(
         model="gpt-4o-2024-08-06",
         messages=[
@@ -21,4 +21,4 @@ def check_fact(client: OpenAI, user_fact: str, backstory: str, answer: str) -> b
         ],
         response_format=FactValidation,
     )
-    return response.choices[0].message.parsed.is_correct
+    return response.choices[0].message.parsed.result

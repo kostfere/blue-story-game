@@ -11,8 +11,8 @@ def generate_mystery(client: OpenAI) -> Mystery:
 
 
 def ask_question(client: OpenAI, user_question: str, mystery: Mystery) -> str:
-    return ask_question_impl(client, user_question, mystery.backstory, mystery.answer)
+    return ask_question_impl(client, user_question, mystery)
 
 
 def check_fact(client: OpenAI, user_fact: str, mystery: Mystery) -> bool:
-    return check_fact_impl(client, user_fact, mystery.backstory, mystery.answer)
+    return check_fact_impl(client, user_fact, mystery)

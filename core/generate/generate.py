@@ -13,6 +13,6 @@ def generate_mystery(client: OpenAI) -> Mystery:
             {"role": "user", "content": "Create an intriguing lateral thinking mystery."},
         ],
         response_format=Mystery,
-        temperature=1.4,
+        # temperature=1,
     )
     return response.choices[0].message.parsed

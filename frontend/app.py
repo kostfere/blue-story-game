@@ -103,12 +103,18 @@ def handle_guess_submission(client):
         user_fact = st.text_input("What do you think the hidden fact is?", key="fact_input")
         if st.button("✅ Submit Guess"):
             try:
-                is_correct = check_fact(client, user_fact, st.session_state.mystery)
-                if is_correct:
+                answer = check_fact(client, user_fact, st.session_state.mystery)
+
+                if answer == "Yes":
                     st.success("🎉 Correct! You solved the mystery!")
                     st.session_state.solved = True
+                elif answer == "Yes but incomplete":
+                    st.warning(
+                        "⚠️ Partially correct! You're on the right track, but some details are missing."
+                    )
                 else:
                     st.error("❌ Incorrect. Keep trying!")
+
             except Exception as e:
                 st.error(f"❌ Error checking guess: {e}")
 

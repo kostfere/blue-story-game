@@ -17,8 +17,11 @@ def get_openai_client():
     return OpenAI()
 
 
+openai_client_dependency = Depends(get_openai_client)
+
+
 @app.post("/generate_mystery/", response_model=Mystery)
-async def generate(client: OpenAI = Depends(get_openai_client)):
+async def generate(client: OpenAI = openai_client_dependency):
     global current_mystery
     try:
         current_mystery = generate_mystery(client)
@@ -29,7 +32,7 @@ async def generate(client: OpenAI = Depends(get_openai_client)):
 
 
 @app.post("/ask_question/", response_model=YesNoResponse)
-async def ask(user_question: str, client: OpenAI = Depends(get_openai_client)):
+async def ask(user_question: str, client: OpenAI = openai_client_dependency):
     if current_mystery is None:
         raise HTTPException(status_code=400, detail="No mystery has been generated yet.")
     try:
@@ -41,7 +44,7 @@ async def ask(user_question: str, client: OpenAI = Depends(get_openai_client)):
 
 
 @app.post("/check_fact/", response_model=FactValidation)
-async def check(user_fact: str, client: OpenAI = Depends(get_openai_client)):
+async def check(user_fact: str, client: OpenAI = openai_client_dependency):
     if current_mystery is None:
         raise HTTPException(status_code=400, detail="No mystery has been generated yet.")
     try:

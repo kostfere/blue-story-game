@@ -1,0 +1,21 @@
+[tool.ruff]
+line-length = 100  # Adjust line length to match Black's default (88 or 100)
+target-version = "py311" 
+
+# Enable commonly used ruff rules
+lint.select = [
+    "E",  # Pycodestyle errors
+    "F",  # Pyflakes errors
+    "I",  # Isort for import sorting
+    "B",  # Bugbear for common bugs
+    "UP", # pyupgrade for keeping Python modern
+    "C90",  # McCabe complexity check
+]
+
+# Ignore specific rules if needed
+lint.ignore = [
+    "E501",  # Ignore long lines (if Black handles it)
+]
+
+# Fix common linting issues automatically
+fix = true

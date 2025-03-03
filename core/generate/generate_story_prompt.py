@@ -11,7 +11,6 @@ Your task is to generate **original** Black Stories based on the following examp
 
 ### **Examples**
 
-```json
 [
     {
         "title": "The Blind Beggar",
